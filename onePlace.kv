@@ -1,0 +1,357 @@
+WindowManager:
+    IndexWindow:
+    LogWindow:
+    FailedLogWindow
+    RegWindow:
+    FailedRegWindow:
+    SuccessRegWindow:
+    MainWindow:
+
+<RoundedButton@Button>
+    font_name: 'Roboto'
+    font_size: 28
+    background_normal: ''
+    background_color: (0,0,0,0)
+    canvas.before:
+        Color:
+            rgba: (127/255, 178/255, 57/255, 1.0) if self.state == 'normal' else (127/255, 192/255, 57/255, 1.0)
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [25]
+
+<Header@Label>
+    background_normal: ''
+    background_color: (0, 0, 0, 1)
+    font_name: 'Roboto'
+    font_size: 40
+    canvas.before:
+        Color:
+            rgba: (127/255, 178/255, 57/255, 1.0)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<CoolTextInput@TextInput>
+    background_normal: ''
+    background_color: (232/255, 244/255, 217/255, 1)
+    font_name: 'Roboto'
+    background_normal: 'green'
+    background_down: 'green'
+    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+    size: 0, 70
+    size_hint: 1, None
+    font_size: 26
+    canvas.before:
+        Color:
+            rgba: (99/255, 139/255, 44/255, 1)
+        Line:
+            width: 1
+            rectangle: self.x, self.y, self.width, self.height
+
+<CenterLayout@FloatLayout>
+
+
+<IndexWindow@Screen>:
+    canvas.before:
+        Color:
+            rgba: 212 / 255, 234 / 255, 199 / 255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<LogWindow@Screen>:
+    canvas.before:
+        Color:
+            rgba: 246 / 255, 1, 246 / 255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<FailedLogWindow@Screen>:
+    canvas.before:
+        Color:
+            rgba: 238 / 255, 204 / 255, 204 / 255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<RegWindow@Screen>:
+    canvas.before:
+        Color:
+            rgba: 246 / 255, 1, 246 / 255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<FailedRegWindow@Screen>:
+    canvas.before:
+        Color:
+            rgba: 238 / 255, 204 / 255, 204 / 255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<SuccessRegWindow@Screen>:
+    canvas.before:
+        Color:
+            rgba: 232 / 255, 244 / 255, 217 / 255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<MainWindow@Screen>:
+    canvas.before:
+        Color:
+            rgba: 232 / 255, 244 / 255, 217 / 255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
+<IndexWindow>:
+    name: 'index'
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        padding: 10, 10, 10, 80
+        spacing: 30
+        size: 400, 500
+        size_hint: None, None
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        Image:
+            source: './img/logo.jpg'
+        RoundedButton:
+            pos_hint: {'center_x': 0.5}
+            size_hint: 0.8, 0.2
+            border: 10, 10, 10, 10
+            text: 'Вход'
+            on_release:
+                app.root.current = 'log'
+                root.manager.transition.direction = 'right'
+        RoundedButton:
+            pos_hint: {'center_x': 0.5}
+            size_hint: 0.8, 0.2
+            border: 10, 10, 10, 10
+            text: 'Регистрация'
+            on_release:
+                app.root.current = 'reg'
+                root.manager.transition.direction = 'left'
+
+
+
+
+        # всякая временная чушь
+
+        RoundedButton:
+            pos_hint: {'center_x': 0.5}
+            size_hint: 0.8, 0.2
+            border: 10, 10, 10, 10
+            text: '-   лог'
+            on_release:
+                app.root.current = 'failedlog'
+                root.manager.transition.direction = 'left'
+        RoundedButton:
+            pos_hint: {'center_x': 0.5}
+            size_hint: 0.8, 0.2
+            border: 10, 10, 10, 10
+            text: '-    рег'
+            on_release:
+                app.root.current = 'failedreg'
+                root.manager.transition.direction = 'left'
+        RoundedButton:
+            pos_hint: {'center_x': 0.5}
+            size_hint: 0.8, 0.2
+            border: 10, 10, 10, 10
+            text: 'Главная'
+            on_release:
+                app.root.current = 'main'
+                root.manager.transition.direction = 'left'
+        RoundedButton:
+            pos_hint: {'center_x': 0.5}
+            size_hint: 0.8, 0.2
+            border: 10, 10, 10, 10
+            text: '+    рег'
+            on_release:
+                app.root.current = 'sucreg'
+                root.manager.transition.direction = 'left'
+
+<LogWindow>:
+    name: 'log'
+    CenterLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        padding: 50, 0, 50 ,120
+        Header:
+            pos_hint: {'center_x': 0.5, 'top': 1}
+            font_size: 50
+            size: root.width, 75
+            size_hint: None, None
+            text: 'Вход'
+        BoxLayout:
+            padding: 0, 50, 0, 0
+            orientation: 'vertical'
+            size: 400, 500
+            size_hint: None, None
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            spacing: 10
+            BoxLayout:
+                size_hint: 0.8, 0.9
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                orientation: 'vertical'
+                spacing: 10
+                Label:
+                    color: (99/255, 139/255, 44/255, 1)
+                    font_name: 'Roboto'
+                    text: 'Никнейм'
+                    halign: 'left'
+                    text_size: self.size
+                    size_hint: 0.4, None
+                    size: 0, 50
+                    font_size: 25
+                CoolTextInput:
+            BoxLayout:
+                size_hint: 0.8, 0.9
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                orientation: 'vertical'
+                spacing: 10
+                Label:
+                    color: (99/255, 139/255, 44/255, 1)
+                    font_name: 'Roboto'
+                    text: 'Пароль'
+                    halign: 'left'
+                    text_size: self.size
+                    size_hint: 0.4, None
+                    size: 0, 50
+                    font_size: 25
+                CoolTextInput:
+            BoxLayout:
+                size: 0, 100
+                size_hint: 0.6, None
+                orientation: 'vertical'
+                pos_hint: {'center_x': 0.5}
+                RoundedButton:
+                    text: 'Подтвердить'
+                    size: 0, 70
+                    size_hint: 1, None
+                    on_release:
+                        app.root.current = 'index' # TODO: сюда въебать успешный/нет лог
+                        root.manager.transition.direction = 'left'
+            BoxLayout:
+                size_hint: 0.8, 0.9
+                pos_hint: {'center_x': 0.5}
+                orientation: 'vertical'
+                Label:
+                    color: 'black'
+                    text: 'Нет аккаунта?'
+                    size: 0, 25
+                    size_hint: 1, None
+                    font_size: 20
+                    pos_hint: {'center_x': 0.5, 'top' : 1}
+                Button:
+                    text: 'Зарегистрироваться'
+                    color: 'green'
+                    background_color: (0, 0, 0, 0)
+                    size: 0, 25
+                    size_hint: 1, None
+                    pos_hint: {'center_x': 0.5, 'top' : 1}
+                    font_size: 20
+                    on_release:
+                        app.root.current = 'reg'
+                        root.manager.transition.direction = 'left'
+
+<FailedLogWindow>:
+    name: 'failedlog'
+
+<RegWindow>:
+    name: 'reg'
+    CenterLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        padding: 50, 0, 50 ,120
+        Header:
+            pos_hint: {'center_x': 0.5, 'top': 1}
+            font_size: 50
+            size: root.width, 75
+            size_hint: None, None
+            text: 'Регистрация'
+        BoxLayout:
+            padding: 0, 50, 0, 0
+            orientation: 'vertical'
+            size: 400, 500
+            size_hint: None, None
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            spacing: 10
+            BoxLayout:
+                size_hint: 0.8, 0.9
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                orientation: 'vertical'
+                spacing: 10
+                Label:
+                    color: (99/255, 139/255, 44/255, 1)
+                    font_name: 'Roboto'
+                    text: 'Никнейм'
+                    halign: 'left'
+                    text_size: self.size
+                    size_hint: 0.4, None
+                    size: 0, 50
+                    font_size: 25
+                CoolTextInput:
+            BoxLayout:
+                size_hint: 0.8, 0.9
+                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                orientation: 'vertical'
+                spacing: 10
+                Label:
+                    color: (99/255, 139/255, 44/255, 1)
+                    font_name: 'Roboto'
+                    text: 'Пароль'
+                    halign: 'left'
+                    text_size: self.size
+                    size_hint: 0.4, None
+                    size: 0, 50
+                    font_size: 25
+                CoolTextInput:
+            BoxLayout:
+                size: 0, 100
+                size_hint: 0.6, None
+                orientation: 'vertical'
+                pos_hint: {'center_x': 0.5}
+                RoundedButton:
+                    text: 'Подтвердить'
+                    size: 0, 70
+                    size_hint: 1, None
+                    on_release:
+                        app.root.current = 'index' # TODO: сюда въебать успешный/нет рег
+                        root.manager.transition.direction = 'left'
+            BoxLayout:
+                size_hint: 0.8, 0.9
+                pos_hint: {'center_x': 0.5}
+                orientation: 'vertical'
+                Label:
+                    color: 'black'
+                    text: 'Есть аккаунт?'
+                    size: 0, 25
+                    size_hint: 1, None
+                    font_size: 20
+                    pos_hint: {'center_x': 0.5, 'top' : 1}
+                Button:
+                    text: 'Войти'
+                    color: 'green'
+                    background_color: (0, 0, 0, 0)
+                    size: 0, 25
+                    size_hint: 1, None
+                    pos_hint: {'center_x': 0.5, 'top' : 1}
+                    font_size: 20
+                    on_release:
+                        app.root.current = 'log'
+                        root.manager.transition.direction = 'left'
+
+<FailedRegWindow>:
+    name: 'failedreg'
+
+<SuccessRegWindow>:
+    name: 'sucreg'
+
+<MainWindow>:
+    name: 'main'
