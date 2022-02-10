@@ -1,0 +1,18 @@
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS userData;
+
+CREATE TABLE users (
+    userID INTEGER PRIMARY KEY AUTOINCREMENT,
+    username VARCHAR(255),
+    password VARCHAR(500)
+);
+
+CREATE TABLE userData (
+    userID INTEGER PRIMARY KEY,
+    money INTEGER,
+    exp INTEGER DEFAULT 0,
+    firstPlant INTEGER DEFAULT 0,
+    secondPlant INTEGER DEFAULT 0,
+    thirdPlant INTEGER DEFAULT 0,
+    fourthPlant INTEGER DEFAULT 0
+)
