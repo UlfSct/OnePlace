@@ -51,6 +51,14 @@ WindowManager:
 
 <CenterLayout@FloatLayout>
 
+<TestLayout@BoxLayout>:
+    canvas.before:
+        Color:
+            rgba: 0, 1, 0, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
 
 <IndexWindow@Screen>:
     canvas.before:
@@ -346,39 +354,120 @@ WindowManager:
 
 <FailedRegWindow>:
     name: 'failedreg'
-    Label:
-        text: 'рега гавна'
-    RoundedButton:
-        text: 'Главная'
-        size: 0, 70
-        size_hint: 1, None
-        on_release:
-            app.root.current = 'index'
-            root.manager.transition.direction = 'left'
+    BoxLayout:
+        orientation: 'vertical'
+        size: 400, 500
+        padding: 0, 50, 0, 70
+        size_hint: None, None
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        BoxLayout:
+            size_hint: None, None
+            size: 200, 200
+            pos_hint: {'center_x': 0.5, 'bottom' : 1}
+            Image:
+                source: './img/decline.jpg'
+        BoxLayout:
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            orientation: 'vertical'
+            background_color: (1, 0, 0, 1)
+            BoxLayout:
+                pos_hint: {'center_x': 0.5, 'top': 0.5}
+                orientation: 'vertical'
+                Label:
+                    text: 'Имя пользователя занято'
+                    color: 'black'
+                    font_size: 35
+                    size_hint: 1, None
+                    size: 0, 70
+                Button:
+                    text: 'Попробовать снова'
+                    color: (203/255, 102/255, 102/255, 1)
+                    background_color: (0, 0, 0, 0)
+                    pos_hint: {'center_x': 0.5}
+                    size_hint: 1, None
+                    size: 0, 35
+                    font_size: 30
+                    on_release:
+                        app.root.current = 'reg'
+                        root.manager.transition.direction = 'left'
 
 <SuccessRegWindow>:
     name: 'sucreg'
-    Label:
-        text: 'рега топ'
-    RoundedButton:
-        text: 'Главная'
-        size: 0, 70
-        size_hint: 1, None
-        on_release:
-            app.root.current = 'index'
-            root.manager.transition.direction = 'left'
+    BoxLayout:
+        orientation: 'vertical'
+        size: 400, 500
+        padding: 0, 50, 0, 70
+        size_hint: None, None
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        BoxLayout:
+            size_hint: None, None
+            size: 200, 200
+            pos_hint: {'center_x': 0.5, 'bottom' : 1}
+            Image:
+                source: './img/success.jpg'
+        BoxLayout:
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            orientation: 'vertical'
+            background_color: (1, 0, 0, 1)
+            BoxLayout:
+                pos_hint: {'center_x': 0.5, 'top': 0.5}
+                orientation: 'vertical'
+                Label:
+                    text: 'Регистрация завершена'
+                    color: 'black'
+                    font_size: 35
+                    size_hint: 1, None
+                    size: 0, 70
+                Button:
+                    text: 'Войти в аккаунт'
+                    color: (99/255, 139/255, 44/255, 1)
+                    background_color: (0, 0, 0, 0)
+                    pos_hint: {'center_x': 0.5}
+                    size_hint: 1, None
+                    size: 0, 35
+                    font_size: 30
+                    on_release:
+                        app.root.current = 'log'
+                        root.manager.transition.direction = 'left'
 
 <FailedLogWindow>:
     name: 'failedlog'
-    Label:
-        text: 'логин гавна'
-    RoundedButton:
-        text: 'главная'
-        size: 0, 70
-        size_hint: 1, None
-        on_release:
-            app.root.current = 'index'
-            root.manager.transition.direction = 'left'
+    BoxLayout:
+        orientation: 'vertical'
+        size: 400, 500
+        padding: 0, 50, 0, 70
+        size_hint: None, None
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        BoxLayout:
+            size_hint: None, None
+            size: 200, 200
+            pos_hint: {'center_x': 0.5, 'bottom' : 1}
+            Image:
+                source: './img/decline.jpg'
+        BoxLayout:
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            orientation: 'vertical'
+            background_color: (1, 0, 0, 1)
+            BoxLayout:
+                pos_hint: {'center_x': 0.5, 'top': 0.5}
+                orientation: 'vertical'
+                Label:
+                    text: 'Неверные данные'
+                    color: 'black'
+                    font_size: 35
+                    size_hint: 1, None
+                    size: 0, 70
+                Button:
+                    text: 'Попробовать снова'
+                    color: (203/255, 102/255, 102/255, 1)
+                    background_color: (0, 0, 0, 0)
+                    pos_hint: {'center_x': 0.5}
+                    size_hint: 1, None
+                    size: 0, 35
+                    font_size: 30
+                    on_release:
+                        app.root.current = 'log'
+                        root.manager.transition.direction = 'left'
 
 <MainWindow>:
     name: 'main'
