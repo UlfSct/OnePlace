@@ -260,19 +260,6 @@ WindowManager:
                         app.root.current = 'reg'
                         root.manager.transition.direction = 'left'
 
-<FailedLogWindow>:
-    name: 'failedlog'
-    Label:
-        text:'логин/пароль хуйня'
-    RoundedButton:
-            pos_hint: {'center_x': 0.5}
-            size_hint: 0.8, 0.2
-            border: 10, 10, 10, 10
-            text: 'Главная'
-            on_release:
-                app.root.current = 'main'
-                root.manager.transition.direction = 'left'
-
 <RegWindow>:
     name: 'reg'
     CenterLayout:
@@ -360,39 +347,47 @@ WindowManager:
 <FailedRegWindow>:
     name: 'failedreg'
     Label:
-        text:'рега гавна, пользователь есть'
+        text: 'рега гавна'
     RoundedButton:
-            pos_hint: {'center_x': 0.5}
-            size_hint: 0.8, 0.2
-            border: 10, 10, 10, 10
-            text: 'Главная'
-            on_release:
-                app.root.current = 'main'
-                root.manager.transition.direction = 'left'
-
+        text: 'Главная'
+        size: 0, 70
+        size_hint: 1, None
+        on_release:
+            app.root.current = 'index'
+            root.manager.transition.direction = 'left'
 
 <SuccessRegWindow>:
     name: 'sucreg'
     Label:
-        text:'рега удалась'
+        text: 'рега топ'
     RoundedButton:
-            pos_hint: {'center_x': 0.5}
-            size_hint: 0.8, 0.2
-            border: 10, 10, 10, 10
-            text: 'Главная'
-            on_release:
-                app.root.current = 'main'
-                root.manager.transition.direction = 'left'
+        text: 'Главная'
+        size: 0, 70
+        size_hint: 1, None
+        on_release:
+            app.root.current = 'index'
+            root.manager.transition.direction = 'left'
+
+<FailedLogWindow>:
+    name: 'failedlog'
+    Label:
+        text: 'логин гавна'
+    RoundedButton:
+        text: 'главная'
+        size: 0, 70
+        size_hint: 1, None
+        on_release:
+            app.root.current = 'index'
+            root.manager.transition.direction = 'left'
 
 <MainWindow>:
     name: 'main'
     Label:
-        text:'Красава, ты зашёл'
+        text: 'логин супер'
     RoundedButton:
-            pos_hint: {'center_x': 0.5}
-            size_hint: 0.8, 0.2
-            border: 10, 10, 10, 10
-            text: 'Главная'
-            on_release:
-                app.root.current = 'main'
-                root.manager.transition.direction = 'left'
+        text: 'главная'
+        size: 0, 70
+        size_hint: 1, None
+        on_release:
+            app.root.current = 'index'
+            root.manager.transition.direction = 'left'
