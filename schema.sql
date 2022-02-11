@@ -9,7 +9,7 @@ CREATE TABLE users (
 
 CREATE TABLE userData (
     userID INTEGER PRIMARY KEY,
-    money INTEGER,
+    money INTEGER DEFAULT 0,
     exp INTEGER DEFAULT 0,
     firstPlant INTEGER DEFAULT 0,
     secondPlant INTEGER DEFAULT 0,

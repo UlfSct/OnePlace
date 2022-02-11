@@ -210,6 +210,7 @@ WindowManager:
                     size: 0, 50
                     font_size: 25
                 CoolTextInput:
+                    id: usr
             BoxLayout:
                 size_hint: 0.8, 0.9
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
@@ -225,6 +226,7 @@ WindowManager:
                     size: 0, 50
                     font_size: 25
                 CoolTextInput:
+                    id: pwd
             BoxLayout:
                 size: 0, 100
                 size_hint: 0.6, None
@@ -235,8 +237,9 @@ WindowManager:
                     size: 0, 70
                     size_hint: 1, None
                     on_release:
-                        app.root.current = 'index' # TODO: сюда въебать успешный/нет лог
-                        root.manager.transition.direction = 'left'
+                        root.login_user(root.ids.usr.text, root.ids.pwd.text)
+                        # app.root.current = 'index' # TODO: сюда въебать успешный/нет лог
+                        # root.manager.transition.direction = 'left'
             BoxLayout:
                 size_hint: 0.8, 0.9
                 pos_hint: {'center_x': 0.5}
@@ -294,6 +297,7 @@ WindowManager:
                     size: 0, 50
                     font_size: 25
                 CoolTextInput:
+                    id: usr
             BoxLayout:
                 size_hint: 0.8, 0.9
                 pos_hint: {'center_x': 0.5, 'center_y': 0.5}
@@ -309,6 +313,7 @@ WindowManager:
                     size: 0, 50
                     font_size: 25
                 CoolTextInput:
+                    id: pwd
             BoxLayout:
                 size: 0, 100
                 size_hint: 0.6, None
@@ -319,8 +324,9 @@ WindowManager:
                     size: 0, 70
                     size_hint: 1, None
                     on_release:
-                        app.root.current = 'index' # TODO: сюда въебать успешный/нет рег
-                        root.manager.transition.direction = 'left'
+                        root.register_user(root.ids.usr.text, root.ids.pwd.text)
+                        # app.root.current = 'index' # TODO: сюда въебать успешный/нет рег
+                        # root.manager.transition.direction = 'left'
             BoxLayout:
                 size_hint: 0.8, 0.9
                 pos_hint: {'center_x': 0.5}
