@@ -146,27 +146,8 @@ WindowManager:
                 app.root.current = 'reg'
                 root.manager.transition.direction = 'left'
 
-
-
-
         # всякая временная чушь
 
-        RoundedButton:
-            pos_hint: {'center_x': 0.5}
-            size_hint: 0.8, 0.2
-            border: 10, 10, 10, 10
-            text: '-   лог'
-            on_release:
-                app.root.current = 'failedlog'
-                root.manager.transition.direction = 'left'
-        RoundedButton:
-            pos_hint: {'center_x': 0.5}
-            size_hint: 0.8, 0.2
-            border: 10, 10, 10, 10
-            text: '-    рег'
-            on_release:
-                app.root.current = 'failedreg'
-                root.manager.transition.direction = 'left'
         RoundedButton:
             pos_hint: {'center_x': 0.5}
             size_hint: 0.8, 0.2
@@ -174,14 +155,6 @@ WindowManager:
             text: 'Главная'
             on_release:
                 app.root.current = 'main'
-                root.manager.transition.direction = 'left'
-        RoundedButton:
-            pos_hint: {'center_x': 0.5}
-            size_hint: 0.8, 0.2
-            border: 10, 10, 10, 10
-            text: '+    рег'
-            on_release:
-                app.root.current = 'sucreg'
                 root.manager.transition.direction = 'left'
 
 <LogWindow>:
@@ -246,8 +219,6 @@ WindowManager:
                     size_hint: 1, None
                     on_release:
                         root.login_user(root.ids.usr.text, root.ids.pwd.text)
-                        # app.root.current = 'index' # TODO: сюда въебать успешный/нет лог
-                        # root.manager.transition.direction = 'left'
             BoxLayout:
                 size_hint: 0.8, 0.9
                 pos_hint: {'center_x': 0.5}
@@ -333,8 +304,6 @@ WindowManager:
                     size_hint: 1, None
                     on_release:
                         root.register_user(root.ids.usr.text, root.ids.pwd.text)
-                        # app.root.current = 'index' # TODO: сюда въебать успешный/нет рег
-                        # root.manager.transition.direction = 'left'
             BoxLayout:
                 size_hint: 0.8, 0.9
                 pos_hint: {'center_x': 0.5}
