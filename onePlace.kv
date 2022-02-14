@@ -9,7 +9,7 @@ WindowManager:
     RegWindow:
     FailedRegWindow:
     SuccessRegWindow:
-
+    MainWindow:
     PlasticWindow:
     GlassWindow:
     PaperWindow:
@@ -166,6 +166,15 @@ WindowManager:
             pos: self.pos
             radius: [20]
 
+<ProfileCard@MD3Card>
+    canvas.before:
+        Color:
+            rgba: 230/255, 1, 230/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+
 <IndexWindow@Screen>:
     canvas.before:
         Color:
@@ -251,9 +260,6 @@ WindowManager:
             on_release:
                 app.root.current = 'reg'
                 root.manager.transition.direction = 'left'
-
-        # всякая временная чушь
-
 
 <LogWindow>:
     name: 'log'
@@ -558,8 +564,6 @@ WindowManager:
                 name: 'taskWindow'
                 icon: 'home'
 
-
-
             MDBottomNavigationItem:
                 name: 'infoWindow'
                 icon: 'information-outline'
@@ -698,9 +702,78 @@ WindowManager:
                     zoom: 10
 
 
+
             MDBottomNavigationItem:
                 name: 'profileWindow'
                 icon: 'account'
+                BoxLayout:
+                    orientation: 'vertical'
+                    padding: 0, 0, 0, 60
+                    spacing: 30
+                    size_hint: None, None
+                    size: 400, 600
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    BoxLayout:
+                        size: 0, 50
+                        size_hint: 1, None
+                        BlackColorLabel:
+                            font_size: 30
+                            text: '__никнейм__'
+                            markup: True
+                    BoxLayout:
+                        size: 0, 200
+                        size_hint: 1, None
+                        Image:
+                            source: './img/profile.png'
+                    BoxLayout:
+                        size: 400, 230
+                        size_hint: None, None
+                        pos_hint: {'center_x': 0.5}
+                        orientation: 'vertical'
+                        spacing: 30
+                        ProfileCard:
+                            BlackColorLabel:
+                                font_size: 20
+                                text: 'Уровень:              '
+                                halign: 'right'
+                                text_size: self.size
+                                valign: 'middle'
+                            BlackColorLabel:
+                                font_size: 40
+                                markup: True
+                                text: 'ХХ' # TODO: формула из количества опыта
+                                halign: 'left'
+                                text_size: self.size
+                                valign: 'middle'
+                        ProfileCard:
+                            BlackColorLabel:
+                                font_size: 20
+                                text: 'Всего опыта:       '
+                                halign: 'right'
+                                text_size: self.size
+                                valign: 'middle'
+                            BlackColorLabel:
+                                font_size: 40
+                                markup: True
+                                text: 'ХХ' # TODO: количество опыта из бд
+                                halign: 'left'
+                                text_size: self.size
+                                valign: 'middle'
+                        ProfileCard:
+                            BlackColorLabel:
+                                font_size: 20
+                                text: 'Всего монет:       '
+                                halign: 'right'
+                                text_size: self.size
+                                valign: 'middle'
+                            BlackColorLabel:
+                                font_size: 40
+                                markup: True
+                                text: 'ХХ' # TODO: количество монет из бд
+                                halign: 'left'
+                                text_size: self.size
+                                valign: 'middle'
+
 
 <PlasticWindow>:
     name: 'plastic'
