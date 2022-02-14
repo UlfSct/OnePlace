@@ -5,6 +5,9 @@ from kivy.uix.screenmanager import Screen, ScreenManager
 from kivy.app import App
 from kivymd.app import MDApp
 from kivymd.uix.textfield import MDTextFieldRound
+from kivymd.uix.behaviors import RoundedRectangularElevationBehavior
+from kivymd.uix.card import MDCard
+import sqlite3
 from kivy.uix.widget import Widget
 from kivy.properties import StringProperty, NumericProperty, ObjectProperty
 import database as db
@@ -17,6 +20,10 @@ from kivy.uix.boxlayout import BoxLayout
 
 db_name = 'oneplace.db'
 user = User()
+
+
+class MD3Card(MDCard, RoundedRectangularElevationBehavior):
+    text = StringProperty()
 
 
 class WindowManager(ScreenManager):
