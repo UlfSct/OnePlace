@@ -33,15 +33,15 @@ class LogWindow(Screen):
 
 class RegWindow(Screen):
     def check(self, db, username):
-            isOK = True
-            conn = sqlite3.connect(db)
-            conn.row_factory = sqlite3.Row
-            cur = conn.cursor()
-            usr = cur.execute("SELECT * FROM users WHERE username=?", (username,)).fetchone()
-            if usr:
-                isOK = False
-            conn.close()
-            return isOK
+        isOK = True
+        conn = sqlite3.connect(db)
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        usr = cur.execute("SELECT * FROM users WHERE username=?", (username,)).fetchone()
+        if usr:
+            isOK = False
+        conn.close()
+        return isOK
 
     def register_user(self, usr, pwd):
         if self.check('oneplace.db', usr):
@@ -57,11 +57,13 @@ class RegWindow(Screen):
             MDApp.get_running_app().root.current = 'failedreg'
 
 
-Config.set('graphics', 'resizable', '0')
-
+Config.set('graphics', 'resizable', False)
+Config.set('graphics', 'width', '400')
+Config.set('graphics', 'height', '600')
 
 class OnePlaceApp(MDApp):
     def build(self):
+        Window.size = (500, 780)
         return Builder.load_file("onePlace.kv")
 
 

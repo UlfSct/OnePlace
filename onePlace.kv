@@ -1,11 +1,80 @@
+#:import MapView kivy_garden.mapview.MapView
+
+
 WindowManager:
+    MainWindow:
     IndexWindow:
     LogWindow:
-    FailedLogWindow
+    FailedLogWindow:
     RegWindow:
     FailedRegWindow:
     SuccessRegWindow:
-    MainWindow:
+
+    PlasticWindow:
+    GlassWindow:
+    PaperWindow:
+    TetraPackWindow:
+    MetalWindow:
+    BatteryWindow:
+
+
+<PlasticWindow@Screen>:
+    canvas.before:
+        Color:
+            rgba: 251/255, 1, 247/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<GlassWindow@Screen>:
+    canvas.before:
+        Color:
+            rgba: 251/255, 1, 247/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<BatteryWindow@Screen>:
+    canvas.before:
+        Color:
+            rgba: 251/255, 1, 247/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<TetraPackWindow@Screen>:
+    canvas.before:
+        Color:
+            rgba: 251/255, 1, 247/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<MetalWindow@Screen>:
+    canvas.before:
+        Color:
+            rgba: 251/255, 1, 247/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<PaperWindow@Screen>:
+    canvas.before:
+        Color:
+            rgba: 251/255, 1, 247/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<InfoHeaderLine@BoxLayout>
+    size_hint: 1, None
+    size: 0, 2
+    canvas.before:
+        Color:
+            rgba: 167/255, 196/255, 128/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
 <RoundedButton@Button>
     font_name: 'Roboto'
@@ -32,12 +101,45 @@ WindowManager:
             size: self.size
             pos: self.pos
 
+<BlackColorLabel@Label>
+    color: 'black'
+    font_name: 'Roboto'
+    font_size: 23
+
+<BoxBackLayout@BoxLayout>
+    canvas.before:
+        Color:
+            rgba: 251/255, 1, 247/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<BlackColorBackLabel@Label>
+    color: 'black'
+    font_name: 'Roboto'
+    font_size: 23
+    canvas.before:
+        Color:
+            rgba: 251/255, 1, 247/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<ImageWithBack@Image>
+    canvas.before:
+        Color:
+            rgba: 251/255, 1, 247/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
 <CoolTextInput@TextInput>
     background_normal: ''
     background_color: (232/255, 244/255, 217/255, 1)
     font_name: 'Roboto'
     background_normal: 'green'
     background_down: 'green'
+    cursor_color: (0, 0, 0, 1)
     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
     size: 0, 70
     size_hint: 1, None
@@ -49,16 +151,20 @@ WindowManager:
             width: 1
             rectangle: self.x, self.y, self.width, self.height
 
-<CenterLayout@FloatLayout>
-
-<TestLayout@BoxLayout>:
+<InfoLayout@FloatLayout>
+    font_name: 'Open Sans'
+    font_size: 28
+    background_normal: ''
+    background_color: (0,0,0,0)
+    size_hint: 0.8, None
+    size: 0, 225
     canvas.before:
         Color:
-            rgba: 0, 1, 0, 1
-        Rectangle:
-            pos: self.pos
+            rgba: (212/255, 234/255, 199/255, 1.0)
+        RoundedRectangle:
             size: self.size
-
+            pos: self.pos
+            radius: [20]
 
 <IndexWindow@Screen>:
     canvas.before:
@@ -111,7 +217,7 @@ WindowManager:
 <MainWindow@Screen>:
     canvas.before:
         Color:
-            rgba: 232 / 255, 244 / 255, 217 / 255, 1
+            rgba: 251 / 255, 255 / 255, 247 / 255, 1
         Rectangle:
             pos: self.pos
             size: self.size
@@ -148,18 +254,10 @@ WindowManager:
 
         # всякая временная чушь
 
-        RoundedButton:
-            pos_hint: {'center_x': 0.5}
-            size_hint: 0.8, 0.2
-            border: 10, 10, 10, 10
-            text: 'Главная'
-            on_release:
-                app.root.current = 'main'
-                root.manager.transition.direction = 'left'
 
 <LogWindow>:
     name: 'log'
-    CenterLayout:
+    FloatLayout:
         orientation: 'vertical'
         size: root.width, root.height
         padding: 50, 0, 50 ,120
@@ -244,7 +342,7 @@ WindowManager:
 
 <RegWindow>:
     name: 'reg'
-    CenterLayout:
+    FloatLayout:
         orientation: 'vertical'
         size: root.width, root.height
         padding: 50, 0, 50 ,120
@@ -444,14 +542,753 @@ WindowManager:
                         app.root.current = 'log'
                         root.manager.transition.direction = 'left'
 
+
 <MainWindow>:
     name: 'main'
-    Label:
-        text: 'логин супер'
-    RoundedButton:
-        text: 'главная'
-        size: 0, 70
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            md_bg_color: 167/255, 196/255, 128/255, 1
+        MDBottomNavigation:
+            panel_color: 167/255, 196/255, 128/255, 1
+            text_color_active: 0, 0, 0, 1
+            MDBottomNavigationItem:
+                name: 'taskWindow'
+                icon: 'home'
+
+
+
+            MDBottomNavigationItem:
+                name: 'infoWindow'
+                icon: 'information-outline'
+                ScrollView:
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    GridLayout:
+                        cols: 1
+                        rows: 6
+                        size_hint: 1, None
+                        size: 0, 1560
+                        spacing: 30
+                        padding: 50, 30
+                        pos_hint: {'center_x': 0.5}
+                        InfoLayout:
+                            Image:
+                                source: './img/plastic.png'
+                                size_hint: 0.5, 0.5
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+                            Label:
+                                text: 'Пластик'
+                                color: 'black'
+                                font_name: 'Verdana'
+                                font_size: 23
+                                size_hint: 0.5, 0.5
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+                            Button:
+                                background_color: 0, 0, 0, 0
+                                size_hint: 1, 1
+                                pos_hint: {'x': 0, 'y': 0}
+                                on_release:
+                                    app.root.current = 'plastic'
+                        InfoLayout:
+                            Image:
+                                source: './img/glass.png'
+                                size_hint: 0.5, 0.5
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+                            Label:
+                                text: 'Стекло'
+                                color: 'black'
+                                font_name: 'Verdana'
+                                font_size: 23
+                                size_hint: 0.5, 0.5
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+                            Button:
+                                background_color: 0, 0, 0, 0
+                                size_hint: 1, 1
+                                pos_hint: {'x': 0, 'y': 0}
+                                on_release:
+                                    app.root.current = 'glass'
+                        InfoLayout:
+                            Image:
+                                source: './img/paper.png'
+                                size_hint: 0.5, 0.5
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+                            Label:
+                                text: 'Бумага'
+                                color: 'black'
+                                font_name: 'Verdana'
+                                font_size: 23
+                                size_hint: 0.5, 0.5
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+                            Button:
+                                background_color: 0, 0, 0, 0
+                                size_hint: 1, 1
+                                pos_hint: {'x': 0, 'y': 0}
+                                on_release:
+                                    app.root.current = 'paper'
+                        InfoLayout:
+                            Image:
+                                source: './img/tetrapack.png'
+                                size_hint: 0.5, 0.5
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+                            Label:
+                                text: 'Тетрапак'
+                                color: 'black'
+                                font_name: 'Verdana'
+                                font_size: 23
+                                size_hint: 0.5, 0.5
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+                            Button:
+                                background_color: 0, 0, 0, 0
+                                size_hint: 1, 1
+                                pos_hint: {'x': 0, 'y': 0}
+                                on_release:
+                                    app.root.current = 'tetrapack'
+                        InfoLayout:
+                            Image:
+                                source: './img/metal.png'
+                                size_hint: 0.5, 0.5
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+                            Label:
+                                text: 'Металл'
+                                color: 'black'
+                                font_name: 'Verdana'
+                                font_size: 23
+                                size_hint: 0.5, 0.5
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+                            Button:
+                                background_color: 0, 0, 0, 0
+                                size_hint: 1, 1
+                                pos_hint: {'x': 0, 'y': 0}
+                                on_release:
+                                    app.root.current = 'metal'
+                        InfoLayout:
+                            Image:
+                                source: './img/battery.png'
+                                size_hint: 0.5, 0.5
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+                            Label:
+                                text: 'Батарейки'
+                                color: 'black'
+                                font_name: 'Verdana'
+                                font_size: 23
+                                size_hint: 0.5, 0.5
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.2}
+                            Button:
+                                background_color: 0, 0, 0, 0
+                                size_hint: 1, 1
+                                pos_hint: {'x': 0, 'y': 0}
+                                on_release:
+                                    app.root.current = 'battery'
+
+            MDBottomNavigationItem:
+                name: 'gardenWindow'
+                icon: 'flower'
+
+
+            MDBottomNavigationItem:
+                name: 'mapWindow'
+                icon: 'map-marker-outline'
+                MapView:
+                    lat: 55.753223
+                    lon: 37.622512
+                    zoom: 10
+
+
+            MDBottomNavigationItem:
+                name: 'profileWindow'
+                icon: 'account'
+
+<PlasticWindow>:
+    name: 'plastic'
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 30
+            size_hint: 1, None
+            size: 0, 72
+            pos_hint: {'center_x': 0.5, 'top': 1}
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 1, None
+                size: 0, 72
+                BoxLayout:
+                    padding: 20, 0, 0, 0
+                    FloatLayout:
+                        size_hint: None, None
+                        size: 30, 30
+                        padding: 20, 20, 20, 20
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        Image:
+                            size_hint: 1, 1
+                            pos_hint: {'x': 0, 'y': 0}
+                            source: './img/back.png'
+                        Button:
+                            size_hint: 1, 1
+                            pos_hint: {'x': 0, 'y': 0}
+                            background_color: 0, 0, 0, 0
+                            on_release:
+                                app.root.current = 'main'
+                        Label:
+                            size_hint: 1, 1
+                            pos_hint: {'x': 7.1, 'y': 0}
+                            text: 'Пластик'
+                            font_size: 30
+                            font_name: 'Verdana'
+                            color: 99/255, 139/255, 44/255, 1
+                InfoHeaderLine:
+        BoxLayout:
+            orientation: 'vertical'
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size: self.size
+                GridLayout:
+                    cols: 1
+                    rows: 8
+                    size_hint_y: None
+                    size: 0, 3150
+                    BoxBackLayout:
+                        orientation: 'vertical'
+                        size_hint: 1, None
+                        size: 0, 450
+                        ImageWithBack:
+                            source: './img/plastic_in_1.png'
+                            size_hint: 1, None
+                            size: 0, 100
+                        BlackColorBackLabel:
+                            text: 'ПЭТ'
+                            size_hint: 1, None
+                            size: 0, 80
+                            halign: 'center'
+                            font_size: 40
+                            markup: True
+                        BlackColorBackLabel:
+                            text: 'полиэтилентерефталат'
+                            size_hint: 1, None
+                            size: 0, 50
+                            halign: 'center'
+                            font_size: 30
+                        BlackColorBackLabel:
+                            text: 'бутылки из под воды,\nгазировки, сока,\nмолока'
+                            size_hint: 1, None
+                            size: 0, 100
+                            halign: 'center'
+                            font_size: 20
+                        BlackColorBackLabel:
+                            color: 127/255, 178/255, 57/255, 1
+                            text: 'Перерабатывается'
+                            size_hint: 1, None
+                            size: 0, 100
+                            font_size: 25
+                            halign: 'center'
+                    BoxBackLayout:
+                        orientation: 'vertical'
+                        size_hint: 1, None
+                        size: 0, 450
+                        ImageWithBack:
+                            source: './img/plastic_in_2.png'
+                            size_hint: 1, None
+                            size: 0, 100
+                        BlackColorBackLabel:
+                            text: 'ПНД'
+                            size_hint: 1, None
+                            size: 0, 80
+                            halign: 'center'
+                            font_size: 40
+                            markup: True
+                        BlackColorBackLabel:
+                            text: 'полиэтилен низкого давления'
+                            size_hint: 1, None
+                            size: 0, 50
+                            halign: 'center'
+                            font_size: 30
+                        BlackColorBackLabel:
+                            text: 'упаковки от шампуня,\nгеля для душа и\nдругих мющих средств'
+                            size_hint: 1, None
+                            size: 0, 100
+                            halign: 'center'
+                            font_size: 20
+                        BlackColorBackLabel:
+                            color: 127/255, 178/255, 57/255, 1
+                            text: 'Перерабатывается'
+                            size_hint: 1, None
+                            size: 0, 100
+                            font_size: 25
+                            halign: 'center'
+                    BoxBackLayout:
+                        orientation: 'vertical'
+                        size_hint: 1, None
+                        size: 0, 450
+                        ImageWithBack:
+                            source: './img/plastic_in_3.png'
+                            size_hint: 1, None
+                            size: 0, 100
+                        BlackColorBackLabel:
+                            text: 'ПВХ'
+                            size_hint: 1, None
+                            size: 0, 80
+                            halign: 'center'
+                            font_size: 40
+                            markup: True
+                        BlackColorBackLabel:
+                            text: 'поливинилхлорид'
+                            size_hint: 1, None
+                            size: 0, 50
+                            halign: 'center'
+                            font_size: 30
+                        BlackColorBackLabel:
+                            text: 'контейнеры и\nпленка для пищевых\nпродуктов'
+                            size_hint: 1, None
+                            size: 0, 100
+                            halign: 'center'
+                            font_size: 20
+                        BlackColorBackLabel:
+                            color: 168/255, 0, 0, 1
+                            text: 'Не перерабатывается'
+                            size_hint: 1, None
+                            size: 0, 100
+                            font_size: 25
+                            halign: 'center'
+                    BoxBackLayout:
+                        orientation: 'vertical'
+                        size_hint: 1, None
+                        size: 0, 450
+                        ImageWithBack:
+                            source: './img/plastic_in_4.png'
+                            size_hint: 1, None
+                            size: 0, 100
+                        BlackColorBackLabel:
+                            text: 'ПВД'
+                            size_hint: 1, None
+                            size: 0, 80
+                            halign: 'center'
+                            font_size: 40
+                            markup: True
+                        BlackColorBackLabel:
+                            text: 'полиэтилен высокого давления'
+                            size_hint: 1, None
+                            size: 0, 50
+                            halign: 'center'
+                            font_size: 30
+                        BlackColorBackLabel:
+                            text: 'пластиковые пакеты,\nмногоразовые сумки и бутылки\nот моющих средств'
+                            size_hint: 1, None
+                            size: 0, 100
+                            halign: 'center'
+                            font_size: 20
+                        BlackColorBackLabel:
+                            color: 127/255, 178/255, 57/255, 1
+                            text: 'Перерабатывается'
+                            size_hint: 1, None
+                            size: 0, 100
+                            font_size: 25
+                            halign: 'center'
+                    BoxBackLayout:
+                        orientation: 'vertical'
+                        size_hint: 1, None
+                        size: 0, 450
+                        ImageWithBack:
+                            source: './img/plastic_in_5.png'
+                            size_hint: 1, None
+                            size: 0, 100
+                        BlackColorBackLabel:
+                            text: 'ПП'
+                            size_hint: 1, None
+                            size: 0, 80
+                            halign: 'center'
+                            font_size: 40
+                            markup: True
+                        BlackColorBackLabel:
+                            text: 'полипропилен'
+                            size_hint: 1, None
+                            size: 0, 50
+                            halign: 'center'
+                            font_size: 30
+                        BlackColorBackLabel:
+                            text: 'контейнеры для пищевых\nпродуктов, многоразовая\nпластиковая посуда'
+                            size_hint: 1, None
+                            size: 0, 100
+                            halign: 'center'
+                            font_size: 20
+                        BlackColorBackLabel:
+                            color: 127/255, 178/255, 57/255, 1
+                            text: 'Перерабатывается'
+                            size_hint: 1, None
+                            size: 0, 100
+                            font_size: 25
+                            halign: 'center'
+                    BoxBackLayout:
+                        orientation: 'vertical'
+                        size_hint: 1, None
+                        size: 0, 450
+                        ImageWithBack:
+                            source: './img/plastic_in_6.png'
+                            size_hint: 1, None
+                            size: 0, 100
+                        BlackColorBackLabel:
+                            text: 'ПС'
+                            size_hint: 1, None
+                            size: 0, 80
+                            halign: 'center'
+                            font_size: 40
+                            markup: True
+                        BlackColorBackLabel:
+                            text: 'полистирол'
+                            size_hint: 1, None
+                            size: 0, 50
+                            halign: 'center'
+                            font_size: 30
+                        BlackColorBackLabel:
+                            text: 'лотки и контейнеры\nдля пищевых продуктов,\nодноразовая посуда'
+                            size_hint: 1, None
+                            size: 0, 100
+                            halign: 'center'
+                            font_size: 20
+                        BlackColorBackLabel:
+                            color: 127/255, 178/255, 57/255, 1
+                            text: 'Перерабатывается'
+                            size_hint: 1, None
+                            size: 0, 100
+                            font_size: 25
+                            halign: 'center'
+                    BoxBackLayout:
+                        orientation: 'vertical'
+                        size_hint: 1, None
+                        size: 0, 450
+                        ImageWithBack:
+                            source: './img/plastic_in_7.png'
+                            size_hint: 1, None
+                            size: 0, 100
+                        BlackColorBackLabel:
+                            text: 'прочие виды'
+                            size_hint: 1, None
+                            size: 0, 50
+                            halign: 'center'
+                            font_size: 30
+                        BlackColorBackLabel:
+                            text: 'бутылки для кулера\nи детские бутылочки\nиз поликарбоната,\nлюбые изделия из\nбиоразлагаемых пластиков'
+                            size_hint: 1, None
+                            size: 0, 180
+                            halign: 'center'
+                            font_size: 20
+                        BlackColorBackLabel:
+                            color: 168/255, 0, 0, 1
+                            text: 'Не перерабатывается'
+                            size_hint: 1, None
+                            size: 0, 100
+                            font_size: 25
+                            halign: 'center'
+
+<GlassWindow>:
+    name: 'glass'
+    BoxLayout:
+        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        orientation: 'vertical'
+        BoxLayout:
+            pos_hint: {'x': 0}
+            pos: 0, Window.height - 72
+            orientation: 'vertical'
+            size_hint: 1, None
+            size: 0, 72
+            BoxLayout:
+                padding: 20, 0, 0, 0
+                FloatLayout:
+                    size_hint: None, None
+                    size: 30, 30
+                    padding: 20, 20, 20, 20
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    Image:
+                        size_hint: 1, 1
+                        pos_hint: {'x': 0, 'y': 0}
+                        source: './img/back.png'
+                    Button:
+                        size_hint: 1, 1
+                        pos_hint: {'x': 0, 'y': 0}
+                        background_color: 0, 0, 0, 0
+                        on_release:
+                            app.root.current = 'main'
+                    Label:
+                        size_hint: 1, 1
+                        pos_hint: {'x': 7.1, 'y': 0}
+                        text: 'Стекло'
+                        font_size: 30
+                        font_name: 'Verdana'
+                        color: 99/255, 139/255, 44/255, 1
+            InfoHeaderLine:
+        BoxLayout:
+            orientation: 'vertical'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+            size_hint: None, 1
+            size: 400, 0
+            BlackColorLabel:
+                color: 127/255, 178/255, 57/255, 1
+                text: 'Можно перерабатывать:'
+                size_hint: 1, None
+                size: 0, 70
+                pos_hint: {'left': 0, 'center_y': 0.5}
+                halign: 'center'
+            BlackColorLabel:
+                text: 'чистые банки и бутылки\nразличной формы и цвета, не\nсодержащие остатков пищевых\nпродуктов (стеклянные банки и\nбутылки могут быть с\nэтикетками и алюминиевой\nфольгой, так как они\nотделяются в процессе\nпереработки)'
+                pos_hint: {'left': 0, 'top': 0}
+                halign: 'center'
+            BlackColorLabel:
+                color: 168/255, 0, 0, 1
+                text: 'Нельзя перерабатывать:'
+                size_hint: 1, None
+                size: 0, 70
+                halign: 'center'
+            BlackColorLabel:
+                text: 'фарфоровую и стеклянную\nпосуду, зеркала, оконное\nстекло, лампочки,\nкерамические бутылки и\nпосуду\n\n\n\n'
+                pos_hint: {'left': 0, 'top': 0}
+                halign: 'center'
+
+<PaperWindow>:
+    name: 'paper'
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 30
+            size_hint: 1, None
+            size: 0, 72
+            pos_hint: {'center_x': 0.5, 'top': 1}
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: 1, None
+                size: 0, 72
+                BoxLayout:
+                    padding: 20, 0, 0, 0
+                    FloatLayout:
+                        size_hint: None, None
+                        size: 30, 30
+                        padding: 20, 20, 20, 20
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        Image:
+                            size_hint: 1, 1
+                            pos_hint: {'x': 0, 'y': 0}
+                            source: './img/back.png'
+                        Button:
+                            size_hint: 1, 1
+                            pos_hint: {'x': 0, 'y': 0}
+                            background_color: 0, 0, 0, 0
+                            on_release:
+                                app.root.current = 'main'
+                        Label:
+                            size_hint: 1, 1
+                            pos_hint: {'x': 7.1, 'y': 0}
+                            text: 'Бумага'
+                            font_size: 30
+                            font_name: 'Verdana'
+                            color: 99/255, 139/255, 44/255, 1
+                InfoHeaderLine:
+        BoxLayout:
+            orientation: 'vertical'
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size: self.size
+                GridLayout:
+                    cols: 1
+                    rows: 8
+                    size_hint_y: None
+                    size: 0, 1180
+                    BlackColorBackLabel:
+                        text: 'Группа Б'
+                        size_hint: 1, None
+                        size: 0, 60
+                        halign: 'center'
+                        font_size: 40
+                        markup: True
+                    BlackColorBackLabel:
+                        text: 'отходы среднего класса'
+                        size_hint: 1, None
+                        size: 0, 50
+                        halign: 'center'
+                        font_size: 30
+                    BlackColorBackLabel:
+                        text: 'гофрированный картон и его\nкомпоненты;\nкартон с печатью,\nкроме электроизоляционного,\nкровельного и обувного;\nа также книги, журналы,\nброшюры, проспекты,\nкаталоги, блокноты,\nтетради, записные книжки\nбез обложек и другие\nизделия на белой бумаге'
+                        size_hint: 1, None
+                        size: 0, 300
+                        halign: 'center'
+                        font_size: 20
+                    BlackColorBackLabel:
+                        text: 'Группа В'
+                        size_hint: 1, None
+                        size: 0, 60
+                        halign: 'center'
+                        font_size: 40
+                        markup: True
+                    BlackColorBackLabel:
+                        text: 'отходы низкого класса'
+                        size_hint: 1, None
+                        size: 0, 50
+                        halign: 'center'
+                        font_size: 30
+                    BlackColorBackLabel:
+                        text: 'газеты; бумажные гильзы,\nшпули, втулки без пропитки;\nлитые изделия из\nбумажной массы;\nвлагостойкий и\nламинированный картон\nи бумага;\nчерный, коричневый и\nцветной картон с\nбольшой заливкой'
+                        size_hint: 1, None
+                        size: 0, 300
+                        halign: 'center'
+                        font_size: 20
+                    BlackColorBackLabel:
+                        color: 127/255, 178/255, 57/255, 1
+                        text: 'Правила переработки:'
+                        size_hint: 1, None
+                        size: 0, 70
+                        halign: 'center'
+                    BlackColorBackLabel:
+                        text: 'Бумага и картон должны быть сухие\n\nОтходы должны быть рассортированы\n(газеты, журналы, картон,\nгофрокартон и пр.)\n\nКниги принимаются без обложек\nДокументы и сборные изделия\nпринимаются без скрепок,\nскоб, файлов, сшивателей'
+                        size_hint: 1, None
+                        size: 0, 300
+                        halign: 'center'
+                        font_size: 20
+
+
+
+
+<TetraPackWindow>:
+    name: 'tetrapack'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 30
         size_hint: 1, None
-        on_release:
-            app.root.current = 'index'
-            root.manager.transition.direction = 'left'
+        size: 0, 72
+        pos_hint: {'center_x': 0.5, 'top': 1}
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, None
+            size: 0, 72
+            BoxLayout:
+                padding: 20, 0, 0, 0
+                FloatLayout:
+                    size_hint: None, None
+                    size: 30, 30
+                    padding: 20, 20, 20, 20
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    Image:
+                        size_hint: 1, 1
+                        pos_hint: {'x': 0, 'y': 0}
+                        source: './img/back.png'
+                    Button:
+                        size_hint: 1, 1
+                        pos_hint: {'x': 0, 'y': 0}
+                        background_color: 0, 0, 0, 0
+                        on_release:
+                            app.root.current = 'main'
+                    Label:
+                        size_hint: 1, 1
+                        pos_hint: {'x': 7.1, 'y': 0}
+                        text: 'Тетрапак'
+                        font_size: 30
+                        font_name: 'Verdana'
+                        color: 99/255, 139/255, 44/255, 1
+            InfoHeaderLine:
+    BoxLayout:
+        orientation: 'vertical'
+        pos_hint: {'center_x': 0.5, 'top': 1}
+        size_hint: None, None
+        size: 400, 550
+        spacing: 30
+        BlackColorLabel:
+            text: '\n\nКак подготовить тетрапак к сдаче:'
+        BlackColorLabel:
+            text: '• Разрежьте и отогните все\nуголки, чтобы хорошо сполоснуть\n\n• Сложите компактно\n\n• Можно сдавать с трубочками,\nкрышками, горлышком'
+        Image:
+            source: './img/tetrapack_in_1.png'
+
+<MetalWindow>:
+    name: 'metal'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 30
+        size_hint: 1, None
+        size: 0, 72
+        pos_hint: {'center_x': 0.5, 'top': 1}
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, None
+            size: 0, 72
+            BoxLayout:
+                padding: 20, 0, 0, 0
+                FloatLayout:
+                    size_hint: None, None
+                    size: 30, 30
+                    padding: 20, 20, 20, 20
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    Image:
+                        size_hint: 1, 1
+                        pos_hint: {'x': 0, 'y': 0}
+                        source: './img/back.png'
+                    Button:
+                        size_hint: 1, 1
+                        pos_hint: {'x': 0, 'y': 0}
+                        background_color: 0, 0, 0, 0
+                        on_release:
+                            app.root.current = 'main'
+                    Label:
+                        size_hint: 1, 1
+                        pos_hint: {'x': 7.1, 'y': 0}
+                        text: 'Металл'
+                        font_size: 30
+                        font_name: 'Verdana'
+                        color: 99/255, 139/255, 44/255, 1
+            InfoHeaderLine:
+    BoxLayout:
+        orientation: 'vertical'
+        pos_hint: {'center_x': 0.5, 'top': 1}
+        size_hint: None, None
+        size: 400, 400
+        spacing: 30
+        BlackColorLabel:
+            text: '\n\nКак подготовить металл к сдаче:'
+        BlackColorLabel:
+            text: '• Выбрасывать можно только\nчистые металлические и жестяные\nбанки без остатков пищевых\nпродуктов\n\n• Перед выбрасыванием\nметаллическую упаковку следует\nрасплющить, чтобы она занимала\nменьше места и контейнер\nслишком быстро не заполнялся'
+
+
+<BatteryWindow>:
+    name: 'battery'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 30
+        size_hint: 1, None
+        size: 0, 72
+        pos_hint: {'center_x': 0.5, 'top': 1}
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 1, None
+            size: 0, 72
+            BoxLayout:
+                padding: 20, 0, 0, 0
+                FloatLayout:
+                    size_hint: None, None
+                    size: 30, 30
+                    padding: 20, 20, 20, 20
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    Image:
+                        size_hint: 1, 1
+                        pos_hint: {'x': 0, 'y': 0}
+                        source: './img/back.png'
+                    Button:
+                        size_hint: 1, 1
+                        pos_hint: {'x': 0, 'y': 0}
+                        background_color: 0, 0, 0, 0
+                        on_release:
+                            app.root.current = 'main'
+                    Label:
+                        size_hint: 1, 1
+                        pos_hint: {'x': 7.1, 'y': 0}
+                        text: 'Батарейки'
+                        font_size: 30
+                        font_name: 'Verdana'
+                        color: 99/255, 139/255, 44/255, 1
+            InfoHeaderLine:
+    BoxLayout:
+        orientation: 'vertical'
+        pos_hint: {'center_x': 0.5, 'top': 1}
+        size_hint: None, None
+        size: 400, 550
+        BlackColorLabel:
+            text: '• Обычные батарейки и\nаккумуляторы выбрасывются в\nспециальные контейнеры или\nотносятся в пунк приема\nбатареек\n\n• Автомобильные аккумуляторы\nсдаются в пункты приема\nвредных для окружающей среды\nизделий или на площадки для\nсортировки отходов'
+
