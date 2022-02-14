@@ -3,6 +3,7 @@
 
 WindowManager:
     IndexWindow:
+    MainWindow:
     LogWindow:
     FailedLogWindow:
     RegWindow:
@@ -550,6 +551,8 @@ WindowManager:
 
 <MainWindow>:
     name: 'main'
+    map: map
+    on_enter: root.build_map()
     BoxLayout:
         orientation: 'vertical'
         MDToolbar:
@@ -693,6 +696,7 @@ WindowManager:
                 name: 'mapWindow'
                 icon: 'map-marker-outline'
                 MapView:
+                    id: map
                     lat: 55.753223
                     lon: 37.622512
                     zoom: 10
