@@ -16,6 +16,9 @@ from kivy_garden.mapview import MapView, MapMarker, MapLayer, MarkerMapLayer, Ma
 from kivy.uix.button import Button
 from kivymd.uix.label import MDLabel
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.image import Image
+from kivy.uix.label import Label
+from kivy.graphics import RoundedRectangle, Line, Canvas, Color
 
 
 db_name = 'oneplace.db'
@@ -60,6 +63,35 @@ class RegWindow(Screen):
             MDApp.get_running_app().root.current = 'sucreg'
 
 
+class MarkerPopup(BoxLayout):
+    def __init__(self, desc, icons):
+        super(MarkerPopup, self).__init__()
+        self.orientation = 'vertical'
+        self.padding = (10, 0, 0, 0)
+        label = MDLabel(
+            text=desc,
+            theme_text_color="Custom",
+            text_color=(0, 0, 0, 1)
+        )
+        label.font_size = '11sp'
+        label.texture_update()
+
+        box = BoxLayout()
+        box.padding = (0, 0, 10, 0)
+        for name in icons.split(':'):
+            ico = Image(source=f'img/map/{name}.png')
+            box.add_widget(ico)
+
+        with self.canvas:
+            Color(rgba=(251 / 255, 255 / 255, 247 / 255, 1))
+            RoundedRectangle()
+            Color(0, 0, 0, 1)
+            Line(rounded_rectangle=(self.x, self.y, self.width, self.height, 10), width=1)
+
+        self.add_widget(label)
+        self.add_widget(box)
+
+
 class MainWindow(Screen):
     user = ObjectProperty(user)
     tasks = []
@@ -68,40 +100,20 @@ class MainWindow(Screen):
 
     def build_map(self):
         data = db.get_markers(db_name)
-        self.markers = [
-            MapMarkerPopup(lat=row['lat'], lon=row['lon'], source='img/map/map-marker.ico') for row in data
-        ]
-        for mp in self.markers:
-            mp.add_widget(MDLabel(text='ffff'))
+        self.markers = []
+        for row in data:
+            mp = MapMarkerPopup(lat=row['lat'], lon=row['lon'], source='img/map/map-marker.ico')
+            mp.add_widget(MarkerPopup(row['desc'], row['icon']))
             self.map.add_widget(mp)
+
+    def write_tasks(self):
+        self.ids.task1.text = self.tasks[0]
+        self.ids.task2.text = self.tasks[1]
+        self.ids.task3.text = self.tasks[2]
 
     def __init__(self, **kw):
         super().__init__(**kw)
         self.tasks = db.get_daily_tasks(db_name, 3)
-
-
-class MapWindow(Screen):
-    map = ObjectProperty(None)
-    # layer1 = None
-    # layer2 = None
-    # mp1 = None
-    # mp2 = None  # MapMarker(lat=36.5, lon=-110.7, source='img/map/map_marker.ico')
-    #
-    # def add_map(self):
-    #     self.layer1 = MarkerMapLayer()
-    #     self.mp1 = MapMarker(lat=36, lon=-110, source='img/map/map_marker.ico')
-    #     self.map.add_marker(self.mp1, layer=self.layer1)
-    #     self.map.add_layer(self.layer1)
-    #
-    # def change_layer(self):
-    #     self.map.remove_widget(self.layer1)
-    #     self.layer2 = MarkerMapLayer()
-    #     self.mp2 = MapMarker(lat=36.5, lon=-110.7, source='img/map/map_marker.ico')
-    #     self.map.add_marker(self.mp2, layer=self.layer2)
-    #     self.map.add_layer(self.layer2)
-
-    def __init__(self, **kw):
-        super().__init__(**kw)
 
 
 Config.set('graphics', 'resizable', False)
@@ -116,7 +128,7 @@ class OnePlaceApp(MDApp):
         db.save_user_data(db_name, self.user)
 
     def build(self):
-        Window.size = (500, 780)
+        Window.size = (500, 700)
         return Builder.load_file("onePlace.kv")
 
 
