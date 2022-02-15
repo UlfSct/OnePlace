@@ -591,7 +591,9 @@ WindowManager:
 <MainWindow>:
     name: 'main'
     map: map
-    on_enter: root.build_map()
+    on_enter:
+        root.build_map()
+        root.write_tasks()
     BoxLayout:
         orientation: 'vertical'
         MDToolbar:

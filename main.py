@@ -107,9 +107,8 @@ class MainWindow(Screen):
             self.map.add_widget(mp)
 
     def write_tasks(self):
-        self.ids.task1.text = self.tasks[0]
-        self.ids.task2.text = self.tasks[1]
-        self.ids.task3.text = self.tasks[2]
+        for i, val in enumerate(self.tasks):
+            self.ids[f't{i+1}'].text = f"{val['task']}\n{val['exp']}    {val['money']}"
 
     def __init__(self, **kw):
         super().__init__(**kw)
