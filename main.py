@@ -15,6 +15,7 @@ from userClass import User
 from kivy_garden.mapview import MapView, MapMarker, MapLayer, MarkerMapLayer, MapMarkerPopup
 from kivy.uix.button import Button
 from kivymd.uix.label import MDLabel
+from kivymd.uix.card import MDCard
 from kivy.uix.boxlayout import BoxLayout
 
 
@@ -72,36 +73,12 @@ class MainWindow(Screen):
             MapMarkerPopup(lat=row['lat'], lon=row['lon'], source='img/map/map-marker.ico') for row in data
         ]
         for mp in self.markers:
-            mp.add_widget(MDLabel(text='ffff'))
+            mp.add_widget(MDCard())
             self.map.add_widget(mp)
 
     def __init__(self, **kw):
         super().__init__(**kw)
         self.tasks = db.get_daily_tasks(db_name, 3)
-
-
-class MapWindow(Screen):
-    map = ObjectProperty(None)
-    # layer1 = None
-    # layer2 = None
-    # mp1 = None
-    # mp2 = None  # MapMarker(lat=36.5, lon=-110.7, source='img/map/map_marker.ico')
-    #
-    # def add_map(self):
-    #     self.layer1 = MarkerMapLayer()
-    #     self.mp1 = MapMarker(lat=36, lon=-110, source='img/map/map_marker.ico')
-    #     self.map.add_marker(self.mp1, layer=self.layer1)
-    #     self.map.add_layer(self.layer1)
-    #
-    # def change_layer(self):
-    #     self.map.remove_widget(self.layer1)
-    #     self.layer2 = MarkerMapLayer()
-    #     self.mp2 = MapMarker(lat=36.5, lon=-110.7, source='img/map/map_marker.ico')
-    #     self.map.add_marker(self.mp2, layer=self.layer2)
-    #     self.map.add_layer(self.layer2)
-
-    def __init__(self, **kw):
-        super().__init__(**kw)
 
 
 Config.set('graphics', 'resizable', False)
