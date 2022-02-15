@@ -591,19 +591,47 @@ WindowManager:
 <MainWindow>:
     name: 'main'
     map: map
-    on_enter: root.build_map()
+    on_enter:
+        root.build_map()
+        root.write_tasks()
     BoxLayout:
         orientation: 'vertical'
         MDToolbar:
+            padding: 0, 0, 18, 0
             md_bg_color: 167/255, 196/255, 128/255, 1
+            MDLabel:
+                id: head_label
+                size_hint: None, None
+                width: Window.width
+                halign: 'center'
+                font_name: 'Roboto'
+                font_size: 40
+                color: 237/255, 245/255, 235/255, 1
+                text: 'Задания'
+#                canvas.before:
+#                    Color:
+#                        rgba: 1, 0, 0, 1
+#                    Rectangle:
+#                        size: self.size
+#                        pos: self.pos
         MDBottomNavigation:
             panel_color: 167/255, 196/255, 128/255, 1
             text_color_active: 0, 0, 0, 1
             MDBottomNavigationItem:
+                on_enter: root.ids.head_label.text='Задания'
                 name: 'taskWindow'
                 icon: 'home'
+                BoxLayout:
+                    orientation: 'vertical'
+                    MDLabel:
+                        id: t1
+                    MDLabel:
+                        id: t2
+                    MDLabel:
+                        id: t3
 
             MDBottomNavigationItem:
+                on_enter: root.ids.head_label.text='Информация'
                 name: 'infoWindow'
                 icon: 'information-outline'
                 ScrollView:
@@ -727,6 +755,7 @@ WindowManager:
                                     app.root.current = 'battery'
 
             MDBottomNavigationItem:
+                on_enter: root.ids.head_label.text='Сад'
                 name: 'gardenWindow'
                 icon: 'flower'
                 GardenCounterBlue:
@@ -977,6 +1006,7 @@ WindowManager:
 
 
             MDBottomNavigationItem:
+                on_enter: root.ids.head_label.text='Карта'
                 name: 'mapWindow'
                 icon: 'map-marker-outline'
                 MapView:
@@ -988,6 +1018,7 @@ WindowManager:
 
 
             MDBottomNavigationItem:
+                on_enter: root.ids.head_label.text='Профиль'
                 name: 'profileWindow'
                 icon: 'account'
                 BoxLayout:
