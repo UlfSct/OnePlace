@@ -718,7 +718,7 @@ WindowManager:
                         size_hint: 1, None
                         BlackColorLabel:
                             font_size: 30
-                            text: '__никнейм__'
+                            text: root.user.username
                             markup: True
                     BoxLayout:
                         size: 0, 200
@@ -741,7 +741,7 @@ WindowManager:
                             BlackColorLabel:
                                 font_size: 40
                                 markup: True
-                                text: 'ХХ' # TODO: формула из количества опыта
+                                text: str(root.user.level)
                                 halign: 'left'
                                 text_size: self.size
                                 valign: 'middle'
@@ -755,7 +755,7 @@ WindowManager:
                             BlackColorLabel:
                                 font_size: 40
                                 markup: True
-                                text: 'ХХ' # TODO: количество опыта из бд
+                                text: str(root.user.exp)
                                 halign: 'left'
                                 text_size: self.size
                                 valign: 'middle'
@@ -769,7 +769,7 @@ WindowManager:
                             BlackColorLabel:
                                 font_size: 40
                                 markup: True
-                                text: 'ХХ' # TODO: количество монет из бд
+                                text: str(root.user.money)
                                 halign: 'left'
                                 text_size: self.size
                                 valign: 'middle'
