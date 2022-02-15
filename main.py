@@ -18,7 +18,7 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.card import MDCard
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.image import Image
-from kivy.uix.label import Label
+from kivy.uix.label import Label, ListProperty
 from kivy.graphics import RoundedRectangle, Line, Canvas, Color
 
 
