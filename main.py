@@ -38,6 +38,7 @@ class LogWindow(Screen):
         self.user.username = data['username']
         self.user.money = data['money']
         self.user.exp = data['exp']
+        self.user.update_exp(0)
         for i, val in enumerate([data['plant1'], data['plant2'], data['plant3'], data['plant4']]):
             self.user.plants[i] = val
 
