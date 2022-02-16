@@ -127,7 +127,7 @@ class OnePlaceApp(MDApp):
         db.save_user_data(db_name, self.user)
 
     def build(self):
-        Window.size = (500, 700)
+        Window.size = (500, 780)
         return Builder.load_file("onePlace.kv")
 
 
