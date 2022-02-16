@@ -671,7 +671,7 @@ WindowManager:
                                 font_name: 'Roboto'
                                 text: 'Подтвердить\nвыполнение'
                                 on_release:
-                                    # TODO:
+                                    root.complete_task(0)
                     TaskCard:
                         BoxLayout:
                             BlackColorLabel:
@@ -685,7 +685,7 @@ WindowManager:
                                 font_name: 'Roboto'
                                 text: 'Подтвердить\nвыполнение'
                                 on_release:
-                                    # TODO:
+                                    root.complete_task(1)
                     TaskCard:
                         BoxLayout:
                             BlackColorLabel:
@@ -699,7 +699,7 @@ WindowManager:
                                 font_name: 'Roboto'
                                 text: 'Подтвердить\nвыполнение'
                                 on_release:
-                                    # TODO:
+                                    root.complete_task(2)
 
             MDBottomNavigationItem:
                 on_enter: root.ids.head_label.text='Информация'
@@ -881,7 +881,7 @@ WindowManager:
                                         pos_hint: {'x': 0.175, 'y': 0.175}
                                         source: './img/money.png'
                                     BlackColorLabel:
-                                        text: 'XX' # TODO: кол-во монет
+                                        text: str(root.user.money)
 
                             BoxLayout:
                                 orientation: 'vertical'
@@ -895,7 +895,7 @@ WindowManager:
                                         size: 120, 130
                                         padding: 50, 0, 0, 0
                                         Image:
-                                            source: './img/garden_in_2.png' # TODO: цветок 2
+                                            source: './img/garden_in_2.png'
                                             size_hint: None, None
                                             size: 115, 115
                                     BoxLayout:
@@ -903,7 +903,7 @@ WindowManager:
                                         size: 120, 130
                                         padding: 60, 0, 0, 0
                                         Image:
-                                            source: './img/garden_in_3.png' # TODO: цветок 3
+                                            source: './img/garden_in_3.png'
                                             size_hint: None, None
                                             size: 115, 115
                                 GardenCounterBrown:
@@ -921,7 +921,7 @@ WindowManager:
                                         size: 120, 130
                                         padding: 200, 0, 0, 0
                                         Image:
-                                            source: './img/garden_in_4.png' # TODO: цветок 4
+                                            source: './img/garden_in_4.png'
                                             size_hint: None, None
                                             size: 115, 115
                                 GardenCounterBrown:
@@ -957,15 +957,23 @@ WindowManager:
                                                         size_hint: 1, None
                                                         size: 40, 40
                                                         source: './img/garden_in_1.png'
-                                                    BoxLayout:
-                                                        padding: 10, 0
-                                                        BlackColorLabel:
-                                                            text: '10'
-                                                            font_size: 20
-                                                        Image:
-                                                            size_hint: None, None
-                                                            size: 40, 30
-                                                            source: './img/money.png'
+                                                    FloatLayout:
+                                                        size_hint: 1, 1
+                                                        BoxLayout:
+                                                            size_hint: 1, 1
+                                                            pos_hint: {'x': 0, 'y': 0}
+                                                            padding: 10, 0
+                                                            BlackColorLabel:
+                                                                text: '10'
+                                                                font_size: 20
+                                                            Image:
+                                                                size_hint: None, None
+                                                                size: 40, 30
+                                                                source: './img/money.png'
+                                                        BoxLayout:
+                                                            id: plant1
+                                                            size_hint: 1, 1
+                                                            pos_hint: {'x': 0, 'y': 0}
                                                 BoxLayout:
                                                     size_hint: 1, 1
                                                     pos_hint: {'x': 0, 'y': 0}
@@ -974,7 +982,7 @@ WindowManager:
                                                         size_hint: 1, 1
                                                         background_color: 0, 0, 0, 0
                                                         on_release:
-                                                            app.root.current = 'reg' # TODO: покупка 1
+                                                            root.buy_plant(1, 10)
                                         PlantShopLayout:
                                             FloatLayout:
                                                 size: self.size
@@ -987,15 +995,23 @@ WindowManager:
                                                         size_hint: 1, None
                                                         size: 40, 40
                                                         source: './img/garden_in_2.png'
-                                                    BoxLayout:
-                                                        padding: 10, 0
-                                                        BlackColorLabel:
-                                                            text: '20'
-                                                            font_size: 20
-                                                        Image:
-                                                            size_hint: None, None
-                                                            size: 40, 30
-                                                            source: './img/money.png'
+                                                    FloatLayout:
+                                                        size_hint: 1, 1
+                                                        BoxLayout:
+                                                            size_hint: 1, 1
+                                                            pos_hint: {'x': 0, 'y': 0}
+                                                            padding: 10, 0
+                                                            BlackColorLabel:
+                                                                text: '30'
+                                                                font_size: 20
+                                                            Image:
+                                                                size_hint: None, None
+                                                                size: 40, 30
+                                                                source: './img/money.png'
+                                                        BoxLayout:
+                                                            id: plant2
+                                                            size_hint: 1, 1
+                                                            pos_hint: {'x': 0, 'y': 0}
                                                 BoxLayout:
                                                     size_hint: 1, 1
                                                     pos_hint: {'x': 0, 'y': 0}
@@ -1004,7 +1020,7 @@ WindowManager:
                                                         size_hint: 1, 1
                                                         background_color: 0, 0, 0, 0
                                                         on_release:
-                                                            app.root.current = 'reg' # TODO: покупка 2
+                                                            root.buy_plant(2, 20)
                                         PlantShopLayout:
                                             FloatLayout:
                                                 size: self.size
@@ -1017,15 +1033,23 @@ WindowManager:
                                                         size_hint: 1, None
                                                         size: 40, 40
                                                         source: './img/garden_in_3.png'
-                                                    BoxLayout:
-                                                        padding: 10, 0
-                                                        BlackColorLabel:
-                                                            text: '45'
-                                                            font_size: 20
-                                                        Image:
-                                                            size_hint: None, None
-                                                            size: 40, 30
-                                                            source: './img/money.png'
+                                                    FloatLayout:
+                                                        size_hint: 1, 1
+                                                        BoxLayout:
+                                                            size_hint: 1, 1
+                                                            pos_hint: {'x': 0, 'y': 0}
+                                                            padding: 10, 0
+                                                            BlackColorLabel:
+                                                                text: '40'
+                                                                font_size: 20
+                                                            Image:
+                                                                size_hint: None, None
+                                                                size: 40, 30
+                                                                source: './img/money.png'
+                                                        BoxLayout:
+                                                            id: plant3
+                                                            size_hint: 1, 1
+                                                            pos_hint: {'x': 0, 'y': 0}
                                                 BoxLayout:
                                                     size_hint: 1, 1
                                                     pos_hint: {'x': 0, 'y': 0}
@@ -1034,7 +1058,7 @@ WindowManager:
                                                         size_hint: 1, 1
                                                         background_color: 0, 0, 0, 0
                                                         on_release:
-                                                            app.root.current = 'reg' # TODO: покупка 3
+                                                            root.buy_plant(3, 30)
                                         PlantShopLayout:
                                             FloatLayout:
                                                 size: self.size
@@ -1047,17 +1071,23 @@ WindowManager:
                                                         size_hint: 1, None
                                                         size: 40, 40
                                                         source: './img/garden_in_4.png'
-                                                    BoxLayout:
-#                                                        padding: 10, 0
-#                                                        BlackColorLabel:
-#                                                            text: '60'
-#                                                            font_size: 20
-#                                                        Image:
-#                                                            size_hint: None, None
-#                                                            size: 40, 30
-#                                                            source: './img/money.png'
-                                                        Image:
-                                                            source: './img/bought.png'
+                                                    FloatLayout:
+                                                        size_hint: 1, 1
+                                                        BoxLayout:
+                                                            size_hint: 1, 1
+                                                            pos_hint: {'x': 0, 'y': 0}
+                                                            padding: 10, 0
+                                                            BlackColorLabel:
+                                                                text: '60'
+                                                                font_size: 20
+                                                            Image:
+                                                                size_hint: None, None
+                                                                size: 40, 30
+                                                                source: './img/money.png'
+                                                        BoxLayout:
+                                                            id: plant4
+                                                            size_hint: 1, 1
+                                                            pos_hint: {'x': 0, 'y': 0}
                                                 BoxLayout:
                                                     size_hint: 1, 1
                                                     pos_hint: {'x': 0, 'y': 0}
@@ -1066,7 +1096,7 @@ WindowManager:
                                                         size_hint: 1, 1
                                                         background_color: 0, 0, 0, 0
                                                         on_release:
-                                                            app.root.current = 'reg' # TODO: покупка 4
+                                                            root.buy_plant(4, 40)
                                 GardenCounterBrown:
                                     size_hint_y: None
                                     size: 0, 10

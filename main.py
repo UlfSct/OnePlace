@@ -18,7 +18,7 @@ from kivymd.uix.label import MDLabel
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.image import Image
 from kivy.uix.label import Label, ListProperty
-from kivy.graphics import RoundedRectangle, Line, Canvas, Color
+from kivy.graphics import RoundedRectangle, Line, Canvas, Color, Rectangle
 
 
 db_name = 'oneplace.db'
@@ -109,6 +109,27 @@ class MainWindow(Screen):
     def write_tasks(self):
         for i, val in enumerate(self.tasks):
             self.ids[f't{i+1}'].text = f"{val['task']}\n\nОпыт: {val['exp']}\nМонет: {val['money']}"
+
+    def update_task(self, n):
+        self.tasks = db.get_daily_tasks(db_name, 3)
+        self.ids[f't{n+1}'].text = f"{self.tasks[n]['task']}\n\nОпыт: {self.tasks[n]['exp']}\nМонет: {self.tasks[n]['money']}"
+
+    def complete_task(self, n):
+        self.user.update_money(self.tasks[n]['money'])
+        self.user.update_exp(self.tasks[n]['exp'])
+        self.update_task(n)
+
+    def close_plant(self, n):
+        self.ids[f'plant{n}'].canvas.before.add(Color(rgba=(1, 1, 1, 1)))
+        self.ids[f'plant{n}'].canvas.before.add(
+            Rectangle(pos=self.ids[f'plant{n}'].pos, size=self.ids[f'plant{n}'].size)
+        )
+        self.ids[f'plant{n}'].add_widget(Image(source='./img/bought.png'))
+
+    def buy_plant(self, n, cost):
+        self.close_plant(n)
+        self.user.update_money(-cost)
+        self.user.update_plant(n)
 
     def __init__(self, **kw):
         super().__init__(**kw)
