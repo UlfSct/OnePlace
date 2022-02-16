@@ -56,7 +56,7 @@ class LogWindow(Screen):
 
 class RegWindow(Screen):
     def register_user(self, usr, pwd):
-        if db.is_user_exists(db_name, usr):
+        if not usr or db.is_user_exists(db_name, usr):
             MDApp.get_running_app().root.current = 'failedreg'
         else:
             db.add_user_to_db(db_name, usr, pwd)
@@ -97,6 +97,7 @@ class MainWindow(Screen):
     tasks = []
     map = ObjectProperty(None)
     markers = None
+    cur_task_num = 0
 
     def build_map(self):
         data = db.get_markers(db_name)
@@ -108,11 +109,17 @@ class MainWindow(Screen):
 
     def write_tasks(self):
         for i, val in enumerate(self.tasks):
+            if i > 2:
+                break
             self.ids[f't{i+1}'].text = f"{val['task']}\n\nОпыт: {val['exp']}\nМонет: {val['money']}"
+            self.cur_task_num += 1
 
     def update_task(self, n):
-        self.tasks = db.get_daily_tasks(db_name, 3)
-        self.ids[f't{n+1}'].text = f"{self.tasks[n]['task']}\n\nОпыт: {self.tasks[n]['exp']}\nМонет: {self.tasks[n]['money']}"
+        if self.cur_task_num >= len(self.tasks):
+            self.cur_task_num = 0
+        m = self.cur_task_num
+        self.ids[f't{n+1}'].text = f"{self.tasks[m]['task']}\n\nОпыт: {self.tasks[m]['exp']}\nМонет: {self.tasks[m]['money']}"
+        self.cur_task_num += 1
 
     def complete_task(self, n):
         self.user.update_money(self.tasks[n]['money'])
@@ -127,13 +134,16 @@ class MainWindow(Screen):
         self.ids[f'plant{n}'].add_widget(Image(source='./img/bought.png'))
 
     def buy_plant(self, n, cost):
+        if self.user.money < cost:
+            return
         self.close_plant(n)
         self.user.update_money(-cost)
         self.user.update_plant(n)
+        self.ids[f'pbox{n}'].disabled = True
 
     def __init__(self, **kw):
         super().__init__(**kw)
-        self.tasks = db.get_daily_tasks(db_name, 3)
+        self.tasks = db.get_daily_tasks(db_name)
 
 
 Config.set('graphics', 'resizable', False)

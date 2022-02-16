@@ -41,11 +41,12 @@ def add_user_to_db(db, username, password):
     conn.close()
 
 
-def get_daily_tasks(db, n):
+def get_daily_tasks(db):
     conn = sqlite3.connect(db)
     conn.row_factory = sqlite3.Row
     cur = conn.cursor()
-    tasks = random.sample(cur.execute("SELECT * FROM dailyTasks").fetchall(), n)
+    tasks = cur.execute("SELECT * FROM dailyTasks").fetchall()
+    random.shuffle(tasks)
     cur.close()
     conn.close()
     return tasks
