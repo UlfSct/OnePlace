@@ -108,7 +108,7 @@ class MainWindow(Screen):
 
     def write_tasks(self):
         for i, val in enumerate(self.tasks):
-            self.ids[f't{i+1}'].text = f"{val['task']}\n{val['exp']}    {val['money']}"
+            self.ids[f't{i+1}'].text = f"{val['task']}\n\nОпыт: {val['exp']}\nМонет: {val['money']}"
 
     def __init__(self, **kw):
         super().__init__(**kw)
@@ -127,7 +127,7 @@ class OnePlaceApp(MDApp):
         db.save_user_data(db_name, self.user)
 
     def build(self):
-        Window.size = (500, 700)
+        Window.size = (500, 780)
         return Builder.load_file("onePlace.kv")
 
 
