@@ -66,6 +66,34 @@ WindowManager:
             pos: self.pos
             size: self.size
 
+<TaskCard@MDCard>
+    canvas.before:
+        Color:
+            rgba: 209/255, 232/255, 178/255, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+        Color:
+            rgba: 99/255, 139/255, 44/255, 1
+        Line:
+            width: 1
+            rectangle: self.x, self.y, self.width, self.height
+        Line:
+            width: 1
+            rectangle: self.x + self.width / 2, self.y, 1, self.height
+
+<TaskButton@Button>
+    font_name: 'Roboto'
+    font_size: 28
+    background_normal: ''
+    background_color: (0,0,0,0)
+    canvas.before:
+        Color:
+            rgba: (0, 0, 0, 0) if self.state == 'normal' else (127/255, 192/255, 57/255, 1.0)
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
 <InfoHeaderLine@BoxLayout>
     size_hint: 1, None
     size: 0, 2
@@ -601,7 +629,7 @@ WindowManager:
             md_bg_color: 167/255, 196/255, 128/255, 1
             MDLabel:
                 id: head_label
-                size_hint: None, None
+                size_hint: None, 1
                 width: Window.width
                 halign: 'center'
                 font_name: 'Roboto'
@@ -622,13 +650,56 @@ WindowManager:
                 name: 'taskWindow'
                 icon: 'home'
                 BoxLayout:
+                    size_hint_x: None
+                    size: 500, 0
                     orientation: 'vertical'
-                    MDLabel:
-                        id: t1
-                    MDLabel:
-                        id: t2
-                    MDLabel:
-                        id: t3
+                    padding: 30, 30
+                    spacing: 30
+                    TaskCard:
+                        BoxLayout:
+                            padding: 5, 5
+                            BlackColorLabel:
+                                size_hint: 1, 1
+                                halign: 'left'
+                                font_size: 20
+                                id: t1
+                        BoxLayout:
+                            TaskButton:
+                                background_color: 0, 0, 0, 0
+                                color: 'black'
+                                font_size: 20
+                                font_name: 'Roboto'
+                                text: 'Подтвердить\nвыполнение'
+                                on_release:
+                                    # TODO:
+                    TaskCard:
+                        BoxLayout:
+                            BlackColorLabel:
+                                font_size: 20
+                                id: t2
+                        BoxLayout:
+                            TaskButton:
+                                background_color: 0, 0, 0, 0
+                                color: 'black'
+                                font_size: 20
+                                font_name: 'Roboto'
+                                text: 'Подтвердить\nвыполнение'
+                                on_release:
+                                    # TODO:
+                    TaskCard:
+                        BoxLayout:
+                            BlackColorLabel:
+                                font_size: 20
+                                id: t3
+                        BoxLayout:
+                            TaskButton:
+                                background_color: 0, 0, 0, 0
+                                color: 'black'
+                                font_size: 20
+                                font_name: 'Roboto'
+                                text: 'Подтвердить\nвыполнение'
+                                on_release:
+                                    # TODO:
 
             MDBottomNavigationItem:
                 on_enter: root.ids.head_label.text='Информация'
