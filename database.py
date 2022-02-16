@@ -57,9 +57,15 @@ def save_user_data(db, user):
     cur.execute(
         """UPDATE userData SET 
             money=?,
-            exp=?
+            exp=?,
+            Plant1=?,
+            Plant2=?,
+            Plant3=?,
+            Plant4=?
         WHERE userID=?""",
-        tuple(map(str, [user.money, user.exp, user.userID]))
+        tuple(map(str, [
+            user.money, user.exp, user.plants[0], user.plants[1], user.plants[2], user.plants[3], user.userID
+        ]))
     )
     conn.commit()
     cur.close()
