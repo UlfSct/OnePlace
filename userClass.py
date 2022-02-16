@@ -17,6 +17,3 @@ class User(Widget):
     def update_exp(self, n):
         self.exp += n
         self.level = floor((25 + sqrt(625 + 100 * self.exp)) / 50)
-
-    def update_plant(self, n):
-        self.plants[n] = 1

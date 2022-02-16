@@ -18,7 +18,7 @@ from kivymd.uix.label import MDLabel
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.image import Image
 from kivy.uix.label import Label, ListProperty
-from kivy.graphics import RoundedRectangle, Line, Canvas, Color, Rectangle
+from kivy.graphics import RoundedRectangle, Line, Canvas, Color
 
 
 db_name = 'oneplace.db'
@@ -109,18 +109,6 @@ class MainWindow(Screen):
     def write_tasks(self):
         for i, val in enumerate(self.tasks):
             self.ids[f't{i+1}'].text = f"{val['task']}\n{val['exp']}    {val['money']}"
-
-    def close_plant(self, n):
-        self.ids[f'plant{n}'].canvas.before.add(Color(rgba=(1, 1, 1, 1)))
-        self.ids[f'plant{n}'].canvas.before.add(
-            Rectangle(pos=self.ids[f'plant{n}'].pos, size=self.ids[f'plant{n}'].size)
-        )
-        self.ids[f'plant{n}'].add_widget(Image(source='./img/bought.png'))
-
-    def buy_plant(self, n, cost):
-        self.close_plant(n)
-        self.user.update_money(-cost)
-        self.user.update_plant(n-1)
 
     def __init__(self, **kw):
         super().__init__(**kw)
